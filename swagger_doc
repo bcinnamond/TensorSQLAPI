@@ -1,0 +1,44 @@
+swagger: '2.0'
+info:
+  title: Employee Hours API
+  description: API to retrieve employee clock-in hours and send data to Syteline API.
+  version: '1.0'
+basePath: /api
+tags:
+  - name: Employee
+    description: Operations related to employees
+paths:
+  /get_employee_hours:
+    get:
+      tags:
+        - Employee
+      summary: Retrieve employee clock-in hours
+      description: Returns a list of employee hours for today.
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                employee_code:
+                  type: string
+                  description: The code of the employee.
+                day_summary_header_id:
+                  type: integer
+                  description: The ID of the day summary header.
+                total_hours:
+                  type: number
+                  format: float
+                  description: The total number of hours worked.
+                date:
+                  type: string
+                  format: date
+                  description: The date of the record.
+        '500':
+          description: Failed to get access token
+      consumes:
+        - application/json
+      produces:
+        - application/json
